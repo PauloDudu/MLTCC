@@ -1,0 +1,52 @@
+/* Tema escuro minimalista */
+.v-application {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px !important;
+  background: #000000 !important;
+}
+
+.v-card {
+  border-radius: 4px !important;
+  background: #121212 !important;
+  border: 1px solid #1e1e1e !important;
+}
+
+.v-card:hover {
+  border-color: #333 !important;
+}
+
+.v-btn {
+  text-transform: none !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+}
+
+.v-container {
+  max-width: 1280px !important;
+  padding: 16px !important;
+}
+
+.v-row {
+  margin: -8px !important;
+}
+
+.v-col {
+  padding: 8px !important;
+}
+
+.v-text-field .v-field {
+  border-radius: 4px !important;
+}
+
+.v-select .v-field {
+  border-radius: 4px !important;
+}
+
+.gradient-bg {
+  background: #1e1e1e !important;
+  border-bottom: 2px solid #BB86FC !important;
+}
+
+.v-card-title {
+  font-weight: 500 !important;
+}
