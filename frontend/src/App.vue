@@ -72,5 +72,6 @@ export default {
 .main-content {
   background: #000000;
   min-height: calc(100vh - 56px);
+  overflow-y: auto;
 }
 </style>

@@ -3,8 +3,9 @@
   display: grid;
   gap: 16px;
   padding: 16px;
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  box-sizing: border-box;
 }
 
 /* Home Layout */
@@ -16,6 +17,8 @@
     "feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat3 feat3 feat3 feat3"
     "stats stats stats stats stats stats stats stats stats stats stats stats"
     "info info info info info info chat chat chat chat chat chat";
+  height: calc(100vh - 56px);
+  overflow: hidden;
 }
 
 /* Predict Layout */
@@ -42,7 +45,7 @@
   padding: 20px;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .bento-item:hover {

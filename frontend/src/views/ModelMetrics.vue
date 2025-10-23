@@ -1,5 +1,5 @@
 <template>
-  <div class="bento-grid" style="grid-template-columns: repeat(20, 1fr); grid-template-areas: 'hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero' 'dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset' 'perf perf perf perf perf perf perf perf perf perf algo algo algo algo algo algo algo algo algo algo' 'vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars' 'train train train train train train train train train train train train train train train train train train train train' 'limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits'; min-height: 100vh;">
+  <div class="bento-grid" style="grid-template-columns: repeat(20, 1fr); grid-template-areas: 'hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero' 'dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset' 'dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset' 'perf perf perf perf perf perf perf perf perf perf algo algo algo algo algo algo algo algo algo algo' 'vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars' 'train train train train train train train train train train train train train train train train train train train train' 'limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits'; min-height: 100vh;">
     <!-- Hero Section -->
     <div class="bento-item hero bento-hero text-center">
       <v-icon size="48" class="mb-4">mdi-chart-box</v-icon>
@@ -8,28 +8,43 @@
     </div>
 
     <!-- Dataset Overview -->
-    <div class="bento-item dataset bento-primary">
-      <h3 class="text-h6 font-weight-bold mb-4">
-        <v-icon left>mdi-database</v-icon>
+    <div class="bento-item dataset bento-primary" style="grid-area: dataset; padding: 24px;">
+      <h3 class="text-h5 font-weight-bold mb-6">
+        <v-icon left size="32">mdi-database</v-icon>
         Dataset Cardiovascular
       </h3>
-      <div class="d-flex justify-space-around text-center">
+      <div class="d-flex justify-space-around text-center mb-4">
         <div>
-          <div class="text-h4 font-weight-bold">68.742</div>
-          <div class="text-body-2 opacity-90">Total de Casos</div>
+          <div class="text-h3 font-weight-bold mb-2">68.742</div>
+          <div class="text-h6 opacity-90">Total de Casos</div>
+          <div class="text-body-2 opacity-70 mt-1">Pacientes únicos</div>
         </div>
         <div>
-          <div class="text-h4 font-weight-bold">54.994</div>
-          <div class="text-body-2 opacity-90">Treino (80%)</div>
+          <div class="text-h3 font-weight-bold mb-2">54.994</div>
+          <div class="text-h6 opacity-90">Treino (80%)</div>
+          <div class="text-body-2 opacity-70 mt-1">Para aprendizado</div>
         </div>
         <div>
-          <div class="text-h4 font-weight-bold">13.748</div>
-          <div class="text-body-2 opacity-90">Teste (20%)</div>
+          <div class="text-h3 font-weight-bold mb-2">13.748</div>
+          <div class="text-h6 opacity-90">Teste (20%)</div>
+          <div class="text-body-2 opacity-70 mt-1">Para validação</div>
         </div>
         <div>
-          <div class="text-h4 font-weight-bold">11</div>
-          <div class="text-body-2 opacity-90">Variáveis</div>
+          <div class="text-h3 font-weight-bold mb-2">11</div>
+          <div class="text-h6 opacity-90">Variáveis</div>
+          <div class="text-body-2 opacity-70 mt-1">Características</div>
         </div>
+      </div>
+      <v-divider class="my-4"></v-divider>
+      <div class="text-center">
+        <v-chip color="success" size="large" class="mr-2">
+          <v-icon left>mdi-check-circle</v-icon>
+          Balanceado
+        </v-chip>
+        <v-chip color="info" size="large">
+          <v-icon left>mdi-shield-check</v-icon>
+          Validado
+        </v-chip>
       </div>
     </div>
 
