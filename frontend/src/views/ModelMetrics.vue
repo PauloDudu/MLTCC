@@ -1,220 +1,142 @@
 <template>
-  <v-container fluid class="metrics-container">
-    <PageHeader 
-      title="Métricas do Modelo IA" 
-      subtitle="Transparência e explicabilidade do algoritmo de predição"
-      icon="mdi-chart-box"
-    />
+  <div class="bento-grid" style="grid-template-columns: repeat(20, 1fr); grid-template-areas: 'hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero hero' 'dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset dataset' 'perf perf perf perf perf perf perf perf perf perf algo algo algo algo algo algo algo algo algo algo' 'vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars vars' 'train train train train train train train train train train train train train train train train train train train train' 'limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits limits'; min-height: 100vh;">
+    <!-- Hero Section -->
+    <div class="bento-item hero bento-hero text-center">
+      <v-icon size="48" class="mb-4">mdi-chart-box</v-icon>
+      <h1 class="text-h4 font-weight-bold mb-2">Métricas do Modelo IA</h1>
+      <p class="text-body-1 opacity-80">Transparência e explicabilidade do algoritmo de predição</p>
+    </div>
 
-    <!-- Visão Geral do Dataset -->
-    <v-row>
-      <v-col cols="12">
-        <v-card elevation="2" class="mb-4">
-          <v-card-title class="gradient-bg white--text">
-            <v-icon left>mdi-database</v-icon>
-            Dataset Cardiovascular
-          </v-card-title>
-          <v-card-text class="pa-6">
-            <v-row>
-              <v-col cols="12" md="3">
-                <div class="metric-box text-center">
-                  <div class="text-h4 primary--text font-weight-bold">68.742</div>
-                  <div class="text-body-2">Total de Casos</div>
-                </div>
-              </v-col>
-              <v-col cols="12" md="3">
-                <div class="metric-box text-center">
-                  <div class="text-h4 success--text font-weight-bold">54.994</div>
-                  <div class="text-body-2">Treino (80%)</div>
-                </div>
-              </v-col>
-              <v-col cols="12" md="3">
-                <div class="metric-box text-center">
-                  <div class="text-h4 info--text font-weight-bold">13.748</div>
-                  <div class="text-body-2">Teste (20%)</div>
-                </div>
-              </v-col>
-              <v-col cols="12" md="3">
-                <div class="metric-box text-center">
-                  <div class="text-h4 warning--text font-weight-bold">11</div>
-                  <div class="text-body-2">Variáveis</div>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <!-- Dataset Overview -->
+    <div class="bento-item dataset bento-primary">
+      <h3 class="text-h6 font-weight-bold mb-4">
+        <v-icon left>mdi-database</v-icon>
+        Dataset Cardiovascular
+      </h3>
+      <div class="d-flex justify-space-around text-center">
+        <div>
+          <div class="text-h4 font-weight-bold">68.742</div>
+          <div class="text-body-2 opacity-90">Total de Casos</div>
+        </div>
+        <div>
+          <div class="text-h4 font-weight-bold">54.994</div>
+          <div class="text-body-2 opacity-90">Treino (80%)</div>
+        </div>
+        <div>
+          <div class="text-h4 font-weight-bold">13.748</div>
+          <div class="text-body-2 opacity-90">Teste (20%)</div>
+        </div>
+        <div>
+          <div class="text-h4 font-weight-bold">11</div>
+          <div class="text-body-2 opacity-90">Variáveis</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Performance do Modelo -->
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-card elevation="2">
-          <v-card-title class="bg-success white--text">
-            <v-icon left>mdi-target</v-icon>
-            Performance do Modelo
-          </v-card-title>
-          <v-card-text class="pa-4">
-            <v-list density="compact">
-              <v-list-item>
-                <v-list-item-title>Acurácia Geral</v-list-item-title>
-                <template v-slot:append>
-                  <v-chip color="success" size="small">71.2%</v-chip>
-                </template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Precisão (Classe Positiva)</v-list-item-title>
-                <template v-slot:append>
-                  <v-chip color="primary" size="small">69.8%</v-chip>
-                </template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Recall (Sensibilidade)</v-list-item-title>
-                <template v-slot:append>
-                  <v-chip color="info" size="small">74.1%</v-chip>
-                </template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>F1-Score</v-list-item-title>
-                <template v-slot:append>
-                  <v-chip color="warning" size="small">71.9%</v-chip>
-                </template>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
+    <!-- Performance -->
+    <div class="bento-item perf" style="grid-area: perf;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-target</v-icon>
+        Performance do Modelo
+      </h3>
+      <div class="d-flex flex-column ga-2">
+        <div class="d-flex justify-space-between">
+          <span>Acurácia Geral</span>
+          <v-chip color="success" size="small">71.2%</v-chip>
+        </div>
+        <div class="d-flex justify-space-between">
+          <span>Precisão</span>
+          <v-chip color="primary" size="small">69.8%</v-chip>
+        </div>
+        <div class="d-flex justify-space-between">
+          <span>Recall</span>
+          <v-chip color="info" size="small">74.1%</v-chip>
+        </div>
+        <div class="d-flex justify-space-between">
+          <span>F1-Score</span>
+          <v-chip color="warning" size="small">71.9%</v-chip>
+        </div>
+      </div>
+    </div>
 
-      <v-col cols="12" md="6">
-        <v-card elevation="2">
-          <v-card-title class="bg-info white--text">
-            <v-icon left>mdi-brain</v-icon>
-            Algoritmo Utilizado
-          </v-card-title>
-          <v-card-text class="pa-4">
-            <div class="mb-3">
-              <v-chip color="primary" size="large" class="mb-2">
-                Random Forest Classifier
-              </v-chip>
-            </div>
-            <v-list density="compact">
-              <v-list-item>
-                <v-list-item-title>Número de Árvores</v-list-item-title>
-                <template v-slot:append>100</template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Critério de Divisão</v-list-item-title>
-                <template v-slot:append>Gini</template>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Seed Aleatória</v-list-item-title>
-                <template v-slot:append>42</template>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <!-- Algorithm -->
+    <div class="bento-item algo" style="grid-area: algo;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-brain</v-icon>
+        Algoritmo
+      </h3>
+      <v-chip color="#BB86FC" size="large" class="mb-3">Random Forest</v-chip>
+      <div class="d-flex flex-column ga-1">
+        <div class="d-flex justify-space-between">
+          <span class="text-body-2">Árvores:</span>
+          <span class="text-body-2">100</span>
+        </div>
+        <div class="d-flex justify-space-between">
+          <span class="text-body-2">Critério:</span>
+          <span class="text-body-2">Gini</span>
+        </div>
+        <div class="d-flex justify-space-between">
+          <span class="text-body-2">Seed:</span>
+          <span class="text-body-2">42</span>
+        </div>
+      </div>
+    </div>
 
-    <!-- Variáveis do Modelo -->
-    <v-row class="mt-4">
-      <v-col cols="12">
-        <v-card elevation="2">
-          <v-card-title class="bg-warning white--text">
-            <v-icon left>mdi-format-list-bulleted</v-icon>
-            Variáveis de Entrada
-          </v-card-title>
-          <v-card-text class="pa-4">
-            <v-row>
-              <v-col cols="12" sm="6" md="4" v-for="variable in variables" :key="variable.name">
-                <v-card variant="outlined" class="variable-card">
-                  <v-card-text class="pa-3">
-                    <div class="d-flex align-center mb-2">
-                      <v-icon :color="variable.color" class="mr-2">{{ variable.icon }}</v-icon>
-                      <span class="font-weight-medium">{{ variable.name }}</span>
-                    </div>
-                    <div class="text-body-2 text-medium-emphasis">{{ variable.description }}</div>
-                    <div class="text-caption mt-1">
-                      <strong>Tipo:</strong> {{ variable.type }}
-                    </div>
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <!-- Variables -->
+    <div class="bento-item vars" style="grid-area: vars;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-format-list-bulleted</v-icon>
+        Variáveis de Entrada
+      </h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+        <div v-for="variable in variables.slice(0, 6)" :key="variable.name" class="variable-mini">
+          <div class="d-flex align-center mb-1">
+            <v-icon :color="variable.color" size="small" class="mr-2">{{ variable.icon }}</v-icon>
+            <span class="text-body-2 font-weight-medium">{{ variable.name }}</span>
+          </div>
+          <div class="text-caption opacity-70">{{ variable.type }}</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Processo de Treinamento -->
-    <v-row class="mt-4">
-      <v-col cols="12">
-        <v-card elevation="2">
-          <v-card-title class="gradient-bg white--text">
-            <v-icon left>mdi-cog</v-icon>
-            Processo de Treinamento
-          </v-card-title>
-          <v-card-text class="pa-4">
-            <v-timeline density="compact">
-              <v-timeline-item
-                v-for="step in trainingSteps"
-                :key="step.title"
-                :dot-color="step.color"
-                size="small"
-              >
-                <template v-slot:icon>
-                  <v-icon size="small">{{ step.icon }}</v-icon>
-                </template>
-                <v-card variant="outlined" class="ml-3">
-                  <v-card-text class="pa-3">
-                    <div class="font-weight-medium mb-1">{{ step.title }}</div>
-                    <div class="text-body-2">{{ step.description }}</div>
-                  </v-card-text>
-                </v-card>
-              </v-timeline-item>
-            </v-timeline>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <!-- Training Process -->
+    <div class="bento-item train" style="grid-area: train;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-cog</v-icon>
+        Processo de Treinamento
+      </h3>
+      <div class="d-flex flex-column ga-3">
+        <div v-for="step in trainingSteps.slice(0, 3)" :key="step.title" class="d-flex align-start ga-3">
+          <v-icon :color="step.color" size="small">{{ step.icon }}</v-icon>
+          <div>
+            <div class="text-body-2 font-weight-medium">{{ step.title }}</div>
+            <div class="text-caption opacity-70">{{ step.description.substring(0, 60) }}...</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Limitações e Considerações -->
-    <v-row class="mt-4">
-      <v-col cols="12">
-        <v-card elevation="2">
-          <v-card-title class="bg-error white--text">
-            <v-icon left>mdi-alert-circle</v-icon>
-            Limitações e Considerações
-          </v-card-title>
-          <v-card-text class="pa-4">
-            <v-alert type="warning" variant="tonal" class="mb-3">
-              <strong>Uso Educacional:</strong> Este modelo foi desenvolvido exclusivamente para fins educacionais e não deve ser usado para diagnósticos médicos reais.
-            </v-alert>
-            <v-list density="compact">
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="error">mdi-minus-circle</v-icon>
-                </template>
-                <v-list-item-title>Não substitui avaliação médica profissional</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="error">mdi-minus-circle</v-icon>
-                </template>
-                <v-list-item-title>Baseado em dados históricos, pode não refletir casos individuais</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="error">mdi-minus-circle</v-icon>
-                </template>
-                <v-list-item-title>Acurácia de 71% indica margem de erro significativa</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    <!-- Limitations -->
+    <div class="bento-item limits" style="grid-area: limits; border-color: #f44336;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="error">mdi-alert-circle</v-icon>
+        Limitações
+      </h3>
+      <v-alert type="warning" variant="tonal" class="mb-3" density="compact">
+        <strong>Uso Educacional:</strong> Não deve ser usado para diagnósticos reais.
+      </v-alert>
+      <div class="d-flex flex-column ga-2">
+        <div class="d-flex align-start ga-2">
+          <v-icon color="error" size="small">mdi-minus-circle</v-icon>
+          <span class="text-body-2">Não substitui avaliação médica</span>
+        </div>
+        <div class="d-flex align-start ga-2">
+          <v-icon color="error" size="small">mdi-minus-circle</v-icon>
+          <span class="text-body-2">71% de acurácia indica margem de erro</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -344,33 +266,16 @@ export default {
 </script>
 
 <style scoped>
-.metrics-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.metric-box {
-  padding: 16px;
+.variable-mini {
+  padding: 12px;
+  background: #1a1a1a;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.v-theme--dark .metric-box {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.variable-card {
-  height: 100%;
+  border: 1px solid #2d2d2d;
   transition: all 0.3s ease;
 }
 
-.variable-card:hover {
-  transform: translateY(-2px);
-}
-
-@media (max-width: 960px) {
-  .v-timeline {
-    padding-left: 0;
-  }
+.variable-mini:hover {
+  border-color: #BB86FC;
+  transform: translateY(-1px);
 }
 </style>

@@ -1,29 +1,34 @@
+@import './bento.css';
+
 /* Tema escuro minimalista */
 .v-application {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'Inter', 'Roboto', sans-serif !important;
   font-size: 14px !important;
   background: #000000 !important;
 }
 
 .v-card {
-  border-radius: 4px !important;
+  border-radius: 12px !important;
   background: #121212 !important;
   border: 1px solid #1e1e1e !important;
+  transition: all 0.3s ease !important;
 }
 
 .v-card:hover {
-  border-color: #333 !important;
+  border-color: #BB86FC !important;
+  transform: translateY(-1px) !important;
 }
 
 .v-btn {
   text-transform: none !important;
   font-weight: 500 !important;
-  border-radius: 4px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
 }
 
 .v-container {
-  max-width: 1280px !important;
-  padding: 16px !important;
+  max-width: 1400px !important;
+  padding: 0 !important;
 }
 
 .v-row {
@@ -35,18 +40,46 @@
 }
 
 .v-text-field .v-field {
-  border-radius: 4px !important;
+  border-radius: 8px !important;
 }
 
 .v-select .v-field {
-  border-radius: 4px !important;
+  border-radius: 8px !important;
 }
 
 .gradient-bg {
-  background: #1e1e1e !important;
-  border-bottom: 2px solid #BB86FC !important;
+  background: linear-gradient(135deg, #BB86FC 0%, #9C27B0 100%) !important;
+  color: white !important;
 }
 
 .v-card-title {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+}
+
+/* Bento Grid Utilities */
+.bento-card {
+  background: #121212 !important;
+  border: 1px solid #1e1e1e !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.bento-card:hover {
+  border-color: #BB86FC !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(187, 134, 252, 0.1) !important;
+}
+
+.bento-feature {
+  cursor: pointer;
+  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%) !important;
+}
+
+.bento-primary {
+  background: linear-gradient(135deg, #BB86FC 0%, #9C27B0 100%) !important;
+  color: white !important;
+}
+
+.bento-hero {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
 }

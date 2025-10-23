@@ -1,77 +1,69 @@
 <template>
-  <v-container fluid class="home-container">
-    <PageHeader 
-      title="CardioLearn AI" 
-      subtitle="Sistema Inteligente para Ensino de Doenças Cardiovasculares"
-      icon="mdi-heart-pulse"
-      large
-    />
+  <div class="bento-grid bento-home">
+    <!-- Hero Section -->
+    <div class="bento-item hero bento-hero">
+      <v-icon size="48" class="mb-4 pulse-icon">mdi-heart-pulse</v-icon>
+      <h1 class="text-h3 font-weight-bold mb-2">CardioLearn AI</h1>
+      <p class="text-h6 opacity-80">Sistema Inteligente para Ensino de Doenças Cardiovasculares</p>
+    </div>
 
-    <v-row class="justify-center align-stretch">
-      <v-col cols="12" sm="6" lg="4" class="d-flex">
-        <FeatureCard
-          title="Predição com IA"
-          description="Análise inteligente de risco cardiovascular usando machine learning"
-          icon="mdi-brain"
-          color="primary"
-          to="/predict"
-          button-text="Iniciar Predição"
-        />
-      </v-col>
+    <!-- Feature Cards -->
+    <div class="bento-item feat1 bento-feature" @click="$router.push('/predict')">
+      <v-icon size="32" color="#BB86FC" class="mb-3">mdi-brain</v-icon>
+      <h3 class="text-h6 font-weight-bold mb-2">Predição com IA</h3>
+      <p class="text-body-2 opacity-80 mb-4">Análise inteligente de risco cardiovascular usando machine learning</p>
+      <v-btn color="#BB86FC" variant="outlined" size="small">Iniciar Predição</v-btn>
+    </div>
 
-      <v-col cols="12" sm="6" lg="4" class="d-flex">
-        <FeatureCard
-          title="Casos Clínicos"
-          description="Pratique com casos reais e compare com a IA"
-          icon="mdi-stethoscope"
-          color="secondary"
-          to="/cases"
-          button-text="Praticar Agora"
-        />
-      </v-col>
+    <div class="bento-item feat2 bento-feature" @click="$router.push('/cases')">
+      <v-icon size="32" color="#BB86FC" class="mb-3">mdi-stethoscope</v-icon>
+      <h3 class="text-h6 font-weight-bold mb-2">Casos Clínicos</h3>
+      <p class="text-body-2 opacity-80 mb-4">Pratique com casos reais e compare com a IA</p>
+      <v-btn color="#BB86FC" variant="outlined" size="small">Praticar Agora</v-btn>
+    </div>
 
-      <v-col cols="12" sm="6" lg="4" class="d-flex">
-        <FeatureCard
-          title="Métricas da IA"
-          description="Veja como o modelo foi treinado e suas limitações"
-          icon="mdi-chart-box"
-          color="warning"
-          to="/metrics"
-          button-text="Ver Métricas"
-        />
-      </v-col>
-    </v-row>
+    <div class="bento-item feat3 bento-feature" @click="$router.push('/metrics')">
+      <v-icon size="32" color="#BB86FC" class="mb-3">mdi-chart-box</v-icon>
+      <h3 class="text-h6 font-weight-bold mb-2">Métricas da IA</h3>
+      <p class="text-body-2 opacity-80 mb-4">Veja como o modelo foi treinado e suas limitações</p>
+      <v-btn color="#BB86FC" variant="outlined" size="small">Ver Métricas</v-btn>
+    </div>
 
-    <!-- Seção de estatísticas -->
-    <v-row class="mt-8 justify-center">
-      <v-col cols="12">
-        <v-card class="stats-card gradient-bg" elevation="4">
-          <v-card-text class="text-center pa-6 white--text">
-            <v-row class="align-center">
-              <v-col cols="12" sm="4">
-                <div class="stat-item">
-                  <div class="text-h4 font-weight-bold">68.742</div>
-                  <div class="text-body-1 opacity-90">Casos Analisados</div>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4">
-                <div class="stat-item">
-                  <div class="text-h4 font-weight-bold">71%</div>
-                  <div class="text-body-1 opacity-90">Precisão da IA</div>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4">
-                <div class="stat-item">
-                  <div class="text-h4 font-weight-bold">100%</div>
-                  <div class="text-body-1 opacity-90">Educacional</div>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    <!-- Stats Section -->
+    <div class="bento-item stats bento-primary">
+      <div class="d-flex justify-space-around text-center">
+        <div>
+          <div class="text-h4 font-weight-bold">68.742</div>
+          <div class="text-body-2 opacity-90">Casos Analisados</div>
+        </div>
+        <div>
+          <div class="text-h4 font-weight-bold">71%</div>
+          <div class="text-body-2 opacity-90">Precisão da IA</div>
+        </div>
+        <div>
+          <div class="text-h4 font-weight-bold">100%</div>
+          <div class="text-body-2 opacity-90">Educacional</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="bento-item info">
+      <h4 class="text-h6 font-weight-bold mb-3">Como Funciona</h4>
+      <p class="text-body-2 opacity-80">Nossa IA analisa múltiplos fatores de risco cardiovascular para fornecer predições educacionais, ajudando estudantes de medicina a compreender padrões clínicos.</p>
+    </div>
+
+    <!-- Chat Preview -->
+    <div class="bento-item chat">
+      <h4 class="text-h6 font-weight-bold mb-3">IA Explicativa</h4>
+      <div class="chat-preview">
+        <div class="chat-message mb-2 pa-2" style="background: #1e1e1e; border-radius: 8px;">
+          <small class="opacity-60">IA:</small>
+          <p class="text-body-2 ma-0">"Baseado na idade e pressão arterial, o risco é moderado..."</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,41 +80,21 @@ export default {
 </script>
 
 <style scoped>
-.home-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.pulse-icon {
+  animation: pulse 2s infinite;
 }
 
-.stats-card {
-  border-radius: 16px !important;
-  margin-top: 32px;
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-.stat-item {
-  padding: 16px 0;
+.chat-preview {
+  max-height: 120px;
+  overflow: hidden;
 }
 
-@media (max-width: 960px) {
-  .stats-card {
-    margin-top: 24px;
-  }
-  
-  .stat-item {
-    padding: 8px 0;
-  }
-  
-  .text-h4 {
-    font-size: 1.75rem !important;
-  }
-}
-
-@media (max-width: 600px) {
-  .v-row {
-    margin: -4px !important;
-  }
-  
-  .v-col {
-    padding: 4px !important;
-  }
+.chat-message {
+  border-left: 3px solid #BB86FC;
 }
 </style>

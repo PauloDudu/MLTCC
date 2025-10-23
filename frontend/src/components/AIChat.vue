@@ -74,14 +74,27 @@ export default {
     return {
       messages: [],
       userMessage: '',
-      loading: false
+      loading: false,
+      contextData: null,
+      contextPrediction: null
     }
   },
   mounted() {
-    this.messages.push({
-      role: 'assistant',
-      content: 'Olá! Sou uma IA especializada em cardiologia. Posso explicar melhor o diagnóstico, fatores de risco e responder suas dúvidas sobre este caso. O que gostaria de saber?'
-    })
+    this.initializeContext()
+  },
+  watch: {
+    patientData: {
+      handler() {
+        this.initializeContext()
+      },
+      deep: true
+    },
+    prediction: {
+      handler() {
+        this.initializeContext()
+      },
+      deep: true
+    }
   },
   methods: {
     async sendMessage() {
@@ -99,8 +112,8 @@ export default {
       try {
         const response = await cardiovascularAPI.chatWithAI({
           message,
-          patient_data: this.patientData,
-          prediction: this.prediction,
+          patient_data: this.contextData,
+          prediction: this.contextPrediction,
           chat_history: this.messages.slice(-6)
         })
         
@@ -130,6 +143,33 @@ export default {
     
     formatMessage(content) {
       return marked(content, { breaks: true })
+    },
+    
+    getRiskLabel(risk) {
+      const labels = {
+        'baixo': 'BAIXO',
+        'medio': 'MÉDIO', 
+        'alto': 'ALTO'
+      }
+      return labels[risk] || risk.toUpperCase()
+    },
+    
+    initializeContext() {
+      if (!this.contextData || !this.contextPrediction) {
+        this.contextData = JSON.parse(JSON.stringify(this.patientData))
+        this.contextPrediction = JSON.parse(JSON.stringify(this.prediction))
+        
+        this.messages = [{
+          role: 'assistant',
+          content: `Olá! Analisei o caso com os seguintes dados:\n\n**Paciente:** ${this.contextData.age} anos, ${this.contextData.gender === 1 ? 'Feminino' : 'Masculino'}\n**Risco:** ${this.getRiskLabel(this.contextPrediction.risk_level)} (${(this.contextPrediction.probability * 100).toFixed(1)}%)\n\nPosso explicar melhor o diagnóstico, fatores de risco e responder suas dúvidas sobre este caso específico. O que gostaria de saber?`
+        }]
+      }
+    },
+    
+    resetContext() {
+      this.contextData = null
+      this.contextPrediction = null
+      this.messages = []
     }
   }
 }

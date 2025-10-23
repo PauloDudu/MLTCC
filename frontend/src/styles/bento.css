@@ -1,0 +1,122 @@
+/* Bento Grid System */
+.bento-grid {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Home Layout */
+.bento-home {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "hero hero hero hero hero hero hero hero hero hero hero hero"
+    "feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat3 feat3 feat3 feat3"
+    "stats stats stats stats stats stats stats stats stats stats stats stats"
+    "info info info info info info chat chat chat chat chat chat";
+}
+
+/* Predict Layout */
+.bento-predict {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "form form form form form form form result result result result result"
+    "chat chat chat chat chat chat chat result result result result result";
+}
+
+/* Cases Layout */
+.bento-cases {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "case case case case case case case case answer answer answer answer"
+    "history history history history history history stats stats stats stats stats stats";
+}
+
+/* Bento Items */
+.bento-item {
+  background: #121212;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-item:hover {
+  border-color: #BB86FC;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(187, 134, 252, 0.1);
+}
+
+.bento-item.hero { grid-area: hero; }
+.bento-item.feat1 { grid-area: feat1; }
+.bento-item.feat2 { grid-area: feat2; }
+.bento-item.feat3 { grid-area: feat3; }
+.bento-item.stats { grid-area: stats; }
+.bento-item.info { grid-area: info; }
+.bento-item.chat { grid-area: chat; }
+.bento-item.form { grid-area: form; }
+.bento-item.result { grid-area: result; }
+.bento-item.case { grid-area: case; }
+.bento-item.answer { grid-area: answer; }
+.bento-item.history { grid-area: history; }
+
+/* Special Styles */
+.bento-hero {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.bento-feature {
+  cursor: pointer;
+  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+}
+
+.bento-stats {
+  background: linear-gradient(135deg, #BB86FC 0%, #9C27B0 100%);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .bento-home {
+    grid-template-areas:
+      "hero hero hero hero hero hero hero hero hero hero hero hero"
+      "feat1 feat1 feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat2 feat2"
+      "feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3"
+      "stats stats stats stats stats stats stats stats stats stats stats stats"
+      "info info info info info info info info info info info info"
+      "chat chat chat chat chat chat chat chat chat chat chat chat";
+  }
+  
+  .bento-predict {
+    grid-template-areas:
+      "form form form form form form form form form form form form"
+      "result result result result result result result result result result result result"
+      "chat chat chat chat chat chat chat chat chat chat chat chat";
+  }
+  
+  .bento-cases {
+    grid-template-areas:
+      "case case case case case case case case case case case case"
+      "answer answer answer answer answer answer answer answer answer answer answer answer"
+      "history history history history history history history history history history history history"
+      "stats stats stats stats stats stats stats stats stats stats stats stats";
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .bento-item {
+    padding: 16px;
+    border-radius: 8px;
+  }
+}

@@ -1,29 +1,27 @@
 <template>
-  <v-container fluid class="pa-4">
-    <PageHeader 
-      title="Casos Clínicos" 
-      icon="mdi-stethoscope"
-    />
-    
-    <div v-if="!currentCase" class="text-center">
+  <div class="bento-grid bento-cases">
+    <!-- Header -->
+    <div class="bento-item hero bento-hero text-center" v-if="!currentCase">
+      <v-icon size="48" class="mb-4">mdi-stethoscope</v-icon>
+      <h1 class="text-h4 font-weight-bold mb-4">Casos Clínicos</h1>
       <v-btn 
         @click="generateCase" 
-        color="primary" 
+        color="#BB86FC" 
         size="large" 
         :loading="loading"
       >
         {{ loading ? 'Gerando...' : 'Gerar Novo Caso' }}
       </v-btn>
     </div>
-    
-    <v-row v-if="currentCase">
-      <v-col cols="12" md="8">
-        <v-card flat>
-          <v-card-title class="bg-primary white--text">
-            <v-icon left>mdi-clipboard-text</v-icon>
-            Caso Clínico
-          </v-card-title>
-          <v-card-text class="pa-4">
+
+    <!-- Case Section -->
+    <div class="bento-item case" v-if="currentCase">
+      <div class="mb-4">
+        <h2 class="text-h5 font-weight-bold mb-2">
+          <v-icon left color="#BB86FC">mdi-clipboard-text</v-icon>
+          Caso Clínico
+        </h2>
+      </div>
             <p><strong>Descrição:</strong> {{ currentCase.description }}</p>
             
             <h6 class="mt-4 mb-2">Dados do Paciente:</h6>
@@ -58,17 +56,16 @@
                 </v-list>
               </v-col>
             </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-      
-      <v-col cols="12" md="4">
-        <v-card flat>
-          <v-card-title class="bg-success white--text">
-            <v-icon left>mdi-brain</v-icon>
-            Sua Predição
-          </v-card-title>
-          <v-card-text class="pa-4">
+    </div>
+
+    <!-- Answer Section -->
+    <div class="bento-item answer" v-if="currentCase">
+      <div class="mb-4">
+        <h2 class="text-h5 font-weight-bold mb-2">
+          <v-icon left color="#BB86FC">mdi-brain</v-icon>
+          Sua Predição
+        </h2>
+      </div>
             <v-select
               v-model="userPrediction"
               :items="[
@@ -110,11 +107,22 @@
                 Novo Caso
               </v-btn>
             </v-card>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    </div>
+
+    <!-- History Section -->
+    <div class="bento-item history" v-if="answered">
+      <h3 class="text-h6 font-weight-bold mb-3">Histórico de Casos</h3>
+      <p class="text-body-2 opacity-80">Seus últimos casos resolvidos aparecerão aqui...</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bento-item stats bento-primary" v-if="answered">
+      <div class="text-center">
+        <div class="text-h4 font-weight-bold">85%</div>
+        <div class="text-body-2 opacity-90">Taxa de Acerto</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

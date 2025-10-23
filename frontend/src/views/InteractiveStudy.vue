@@ -1,75 +1,88 @@
 <template>
-  <div class="interactive-study">
-    <h2>🔬 Estudo Interativo</h2>
-    
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h5>Dados Base do Paciente</h5>
-          </div>
-          <div class="card-body">
-            <div class="mb-3">
-              <label class="form-label">Idade: {{ baseData.age }}</label>
-              <input v-model.number="baseData.age" type="range" class="form-range" min="30" max="80" @input="updatePrediction">
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label">Peso: {{ baseData.weight }} kg</label>
-              <input v-model.number="baseData.weight" type="range" class="form-range" min="40" max="150" @input="updatePrediction">
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label">Pressão Sistólica: {{ baseData.ap_hi }} mmHg</label>
-              <input v-model.number="baseData.ap_hi" type="range" class="form-range" min="90" max="200" @input="updatePrediction">
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label">Pressão Diastólica: {{ baseData.ap_lo }} mmHg</label>
-              <input v-model.number="baseData.ap_lo" type="range" class="form-range" min="60" max="120" @input="updatePrediction">
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label">Colesterol: {{ getColesterolLabel(baseData.cholesterol) }}</label>
-              <input v-model.number="baseData.cholesterol" type="range" class="form-range" min="1" max="3" @input="updatePrediction">
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h5>Predição em Tempo Real</h5>
-          </div>
-          <div class="card-body">
-            <div v-if="currentPrediction" class="alert" :class="getRiskClass(currentPrediction.risk_level)">
-              <h6>Risco Atual: {{ getRiskLabel(currentPrediction.risk_level) }}</h6>
-              <p>Probabilidade: {{ (currentPrediction.probability * 100).toFixed(1) }}%</p>
-            </div>
-            
-            <div v-if="impactAnalysis.length > 0">
-              <h6>Análise de Impacto:</h6>
-              <div v-for="analysis in impactAnalysis" :key="analysis.variable" class="mb-2">
-                <small>
-                  <strong>{{ analysis.variable }}:</strong> 
-                  <span :class="analysis.impact > 0 ? 'text-danger' : 'text-success'">
-                    {{ analysis.impact > 0 ? '+' : '' }}{{ (analysis.impact * 100).toFixed(1) }}%
-                  </span>
-                </small>
-              </div>
-            </div>
-          </div>
+  <div class="bento-grid" style="grid-template-columns: repeat(12, 1fr); grid-template-areas: 'hero hero hero hero hero hero hero hero hero hero hero hero' 'controls controls controls controls controls controls result result result result result result' 'chart chart chart chart chart chart analysis analysis analysis analysis analysis analysis';">
+    <!-- Hero Section -->
+    <div class="bento-item hero bento-hero text-center">
+      <v-icon size="48" class="mb-4">mdi-flask</v-icon>
+      <h1 class="text-h4 font-weight-bold mb-2">Estudo Interativo</h1>
+      <p class="text-body-1 opacity-80">Veja como cada variável impacta o risco cardiovascular em tempo real</p>
+    </div>
+
+    <!-- Controls Section -->
+    <div class="bento-item controls" style="grid-area: controls;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-tune</v-icon>
+        Dados do Paciente
+      </h3>
+      <div class="d-flex flex-column ga-3">
+        <div>
+          <label class="text-body-2 mb-1 d-block">Idade: {{ baseData.age }} anos</label>
+          <v-slider v-model="baseData.age" min="30" max="80" @update:model-value="updatePrediction" color="#BB86FC" thumb-label></v-slider>
         </div>
         
-        <div class="card mt-3">
-          <div class="card-header">
-            <h5>Gráfico de Risco</h5>
-          </div>
-          <div class="card-body">
-            <canvas ref="riskChart" width="400" height="200"></canvas>
-          </div>
+        <div>
+          <label class="text-body-2 mb-1 d-block">Peso: {{ baseData.weight }} kg</label>
+          <v-slider v-model="baseData.weight" min="40" max="150" @update:model-value="updatePrediction" color="#BB86FC" thumb-label></v-slider>
         </div>
+        
+        <div>
+          <label class="text-body-2 mb-1 d-block">Pressão Sistólica: {{ baseData.ap_hi }} mmHg</label>
+          <v-slider v-model="baseData.ap_hi" min="90" max="200" @update:model-value="updatePrediction" color="#BB86FC" thumb-label></v-slider>
+        </div>
+        
+        <div>
+          <label class="text-body-2 mb-1 d-block">Colesterol: {{ getColesterolLabel(baseData.cholesterol) }}</label>
+          <v-slider v-model="baseData.cholesterol" min="1" max="3" @update:model-value="updatePrediction" color="#BB86FC" thumb-label></v-slider>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="bento-item result" style="grid-area: result;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-heart-pulse</v-icon>
+        Predição em Tempo Real
+      </h3>
+      <div v-if="currentPrediction">
+        <v-card :color="getRiskColor(currentPrediction.risk_level)" class="mb-3 pa-3" dark>
+          <div class="text-center">
+            <div class="text-h6 font-weight-bold">{{ getRiskLabel(currentPrediction.risk_level) }}</div>
+            <div class="text-body-1">{{ (currentPrediction.probability * 100).toFixed(1) }}%</div>
+          </div>
+        </v-card>
+        
+        <div class="text-body-2 opacity-80">
+          Ajuste os controles para ver como cada variável afeta o risco cardiovascular.
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="bento-item chart" style="grid-area: chart;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-chart-line</v-icon>
+        Histórico de Risco
+      </h3>
+      <div class="chart-container">
+        <canvas ref="riskChart" width="300" height="150"></canvas>
+      </div>
+    </div>
+
+    <!-- Analysis Section -->
+    <div class="bento-item analysis" style="grid-area: analysis;">
+      <h3 class="text-h6 font-weight-bold mb-3">
+        <v-icon left color="#BB86FC">mdi-magnify</v-icon>
+        Análise de Impacto
+      </h3>
+      <div v-if="impactAnalysis.length > 0" class="d-flex flex-column ga-2">
+        <div v-for="analysis in impactAnalysis" :key="analysis.variable" class="d-flex justify-space-between">
+          <span class="text-body-2">{{ analysis.variable }}:</span>
+          <span class="text-body-2" :class="analysis.impact > 0 ? 'text-error' : 'text-success'">
+            {{ analysis.impact > 0 ? '+' : '' }}{{ (analysis.impact * 100).toFixed(1) }}%
+          </span>
+        </div>
+      </div>
+      <div v-else class="text-body-2 opacity-60">
+        Ajuste os controles para ver o impacto...
       </div>
     </div>
   </div>
@@ -150,13 +163,13 @@ export default {
       ctx.stroke()
     },
     
-    getRiskClass(risk) {
-      const classes = {
-        'baixo': 'alert-success',
-        'medio': 'alert-warning',
-        'alto': 'alert-danger'
+    getRiskColor(risk) {
+      const colors = {
+        'baixo': 'success',
+        'medio': 'warning',
+        'alto': 'error'
       }
-      return classes[risk] || 'alert-info'
+      return colors[risk] || 'primary'
     },
     
     getRiskLabel(risk) {
@@ -179,3 +192,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.chart-container {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #2d2d2d;
+}
+</style>

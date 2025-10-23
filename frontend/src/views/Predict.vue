@@ -1,18 +1,13 @@
 <template>
-  <v-container fluid class="pa-4">
-    <PageHeader 
-      title="Predição de Risco Cardiovascular" 
-      icon="mdi-heart-pulse"
-    />
-
-    <v-row class="mt-6">
-      <v-col cols="12" md="6">
-        <v-card flat>
-          <v-card-title class="bg-primary white--text">
-            <v-icon left>mdi-account-heart</v-icon>
+  <div class="bento-grid bento-predict">
+    <!-- Form Section -->
+    <div class="bento-item form">
+        <div class="mb-4">
+          <h2 class="text-h5 font-weight-bold mb-2">
+            <v-icon left color="#BB86FC">mdi-account-heart</v-icon>
             Dados do Paciente
-          </v-card-title>
-          <v-card-text>
+          </h2>
+        </div>
             <v-form @submit.prevent="predictRisk">
               <v-row>
                 <v-col cols="12" sm="6">
@@ -153,23 +148,16 @@
                 {{ loading ? 'Analisando...' : 'Analisar' }}
               </v-btn>
             </v-form>
-          </v-card-text>
-        </v-card>
-        
-        <AIChat 
-          v-if="prediction"
-          :patient-data="patientData" 
-          :prediction="prediction" 
-        />
-      </v-col>
-      
-      <v-col cols="12" md="6" v-if="prediction">
-        <v-card flat class="result-card">
-          <v-card-title class="bg-success white--text">
-            <v-icon left>mdi-chart-donut</v-icon>
-            Resultado da IA
-          </v-card-title>
-          <v-card-text>
+    </div>
+
+    <!-- Result Section -->
+    <div class="bento-item result" v-if="prediction">
+      <div class="mb-4">
+        <h2 class="text-h5 font-weight-bold mb-2">
+          <v-icon left color="#BB86FC">mdi-chart-donut</v-icon>
+          Resultado da IA
+        </h2>
+      </div>
             <v-card 
               :color="getRiskColor(prediction.risk_level)"
               class="mb-3 pa-3"
@@ -211,11 +199,17 @@
               :patient-data="patientData" 
               :prediction="prediction" 
             />
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+    </div>
+
+    <!-- Chat Section -->
+    <div class="bento-item chat" v-if="prediction">
+      <AIChat 
+        ref="aiChat"
+        :patient-data="patientData" 
+        :prediction="prediction" 
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -276,21 +270,54 @@ export default {
   methods: {
     async predictRisk() {
       this.loading = true
+      // Reset chat context for new analysis
+      this.$refs.aiChat?.resetContext()
+      
       try {
         this.prediction = await cardiovascularAPI.predictRisk(this.patientData)
         
         Swal.fire({
-          title: 'Predição Concluída!',
-          text: `Risco ${this.getRiskLabel(this.prediction.risk_level)} detectado`,
-          icon: this.getRiskSwalIcon(this.prediction.risk_level),
-          confirmButtonText: 'Ver Detalhes'
+          title: '🧠 Análise Concluída',
+          html: `
+            <div style="background: linear-gradient(135deg, #BB86FC 0%, #9C27B0 100%); padding: 20px; border-radius: 12px; margin: 16px 0; color: white;">
+              <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">
+                Risco ${this.getRiskLabel(this.prediction.risk_level)}
+              </div>
+              <div style="font-size: 18px; opacity: 0.9;">
+                ${(this.prediction.probability * 100).toFixed(1)}% de probabilidade
+              </div>
+            </div>
+            <p style="color: #888; font-size: 14px; margin-top: 16px;">
+              ✨ Análise baseada em machine learning
+            </p>
+          `,
+          icon: null,
+          background: '#121212',
+          color: '#ffffff',
+          confirmButtonText: '👁️ Ver Detalhes',
+          confirmButtonColor: '#BB86FC',
+          customClass: {
+            popup: 'bento-swal',
+            confirmButton: 'bento-swal-btn'
+          }
         })
       } catch (error) {
         Swal.fire({
-          title: 'Erro!',
-          text: 'Erro ao fazer predição: ' + error.message,
-          icon: 'error',
-          confirmButtonText: 'Tentar Novamente'
+          title: '⚠️ Erro na Análise',
+          html: `
+            <div style="background: #1e1e1e; padding: 20px; border-radius: 12px; margin: 16px 0; border-left: 4px solid #f44336;">
+              <p style="color: #f44336; margin: 0;">${error.message}</p>
+            </div>
+          `,
+          icon: null,
+          background: '#121212',
+          color: '#ffffff',
+          confirmButtonText: '🔄 Tentar Novamente',
+          confirmButtonColor: '#f44336',
+          customClass: {
+            popup: 'bento-swal',
+            confirmButton: 'bento-swal-btn'
+          }
         })
       } finally {
         this.loading = false
@@ -372,5 +399,17 @@ export default {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+:global(.bento-swal) {
+  border-radius: 12px !important;
+  border: 1px solid #1e1e1e !important;
+}
+
+:global(.bento-swal-btn) {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  padding: 12px 24px !important;
 }
 </style>
