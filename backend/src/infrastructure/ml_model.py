@@ -36,9 +36,12 @@ class ScikitLearnMLRepository(MLModelRepository):
         # Calcular fatores de risco
         factors = self._calculate_risk_factors(patient_data, features)
         
+        # Usar probabilidade da classe de risco (índice 1)
+        risk_probability = proba[1] if len(proba) > 1 else max(proba)
+        
         return RiskPrediction(
             risk_level=risk_level,
-            probability=float(max(proba)),
+            probability=float(risk_probability),
             confidence=float(max(proba) - min(proba)),
             factors=factors
         )
@@ -82,10 +85,12 @@ class ScikitLearnMLRepository(MLModelRepository):
         ]
     
     def _convert_to_risk_level(self, prediction: int, proba: np.ndarray) -> RiskLevel:
-        max_proba = max(proba)
-        if max_proba < 0.4:
+        # Usar a probabilidade da classe positiva (risco cardiovascular)
+        risk_proba = proba[1] if len(proba) > 1 else max(proba)
+        
+        if risk_proba < 0.3:
             return RiskLevel.LOW
-        elif max_proba < 0.7:
+        elif risk_proba < 0.6:
             return RiskLevel.MEDIUM
         else:
             return RiskLevel.HIGH
