@@ -5,20 +5,41 @@ import * as directives from 'vuetify/directives'
 export default createVuetify({
   components,
   directives,
+  display: {
+    mobileBreakpoint: 'md',
+    thresholds: {
+      xs: 0,
+      sm: 600,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1920
+    }
+  },
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     themes: {
-      light: {
+      dark: {
         colors: {
-          primary: '#1976D2',
-          secondary: '#424242',
-          accent: '#82B1FF',
-          error: '#FF5252',
+          primary: '#BB86FC',
+          secondary: '#03DAC6',
+          accent: '#BB86FC',
+          error: '#CF6679',
           info: '#2196F3',
           success: '#4CAF50',
-          warning: '#FFC107'
+          warning: '#FB8C00',
+          background: '#000000',
+          surface: '#121212'
         }
       }
+    }
+  },
+  defaults: {
+    VBtn: {
+      style: 'text-transform: none;'
+    },
+    VCard: {
+      elevation: 0
     }
   }
 })

@@ -4,7 +4,6 @@ from pathlib import Path
 
 class AIExplainer:
     def __init__(self):
-        # Carregar API key do .env
         env_path = Path(__file__).parent.parent.parent / '.env'
         if env_path.exists():
             with open(env_path) as f:

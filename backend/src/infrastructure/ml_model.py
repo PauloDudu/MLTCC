@@ -25,10 +25,11 @@ class ScikitLearnMLRepository(MLModelRepository):
     
     async def predict_risk(self, patient_data: PatientData) -> RiskPrediction:
         features = self._patient_to_features(patient_data)
+        features_df = pd.DataFrame([features], columns=self.feature_names)
         
         # Predição de probabilidade
-        proba = self.model.predict_proba([features])[0]
-        prediction = self.model.predict([features])[0]
+        proba = self.model.predict_proba(features_df)[0]
+        prediction = self.model.predict(features_df)[0]
         
         # Converter para RiskLevel
         risk_level = self._convert_to_risk_level(prediction, proba)
@@ -55,12 +56,15 @@ class ScikitLearnMLRepository(MLModelRepository):
         modified_features[var_index] = new_value
         
         # Predições
-        original_proba = self.model.predict_proba([original_features])[0]
-        modified_proba = self.model.predict_proba([modified_features])[0]
+        original_df = pd.DataFrame([original_features], columns=self.feature_names)
+        modified_df = pd.DataFrame([modified_features], columns=self.feature_names)
+        
+        original_proba = self.model.predict_proba(original_df)[0]
+        modified_proba = self.model.predict_proba(modified_df)[0]
         
         # Calcular impacto
         impact = float(max(modified_proba) - max(original_proba))
-        new_prediction = self.model.predict([modified_features])[0]
+        new_prediction = self.model.predict(modified_df)[0]
         new_risk = self._convert_to_risk_level(new_prediction, modified_proba)
         
         return {

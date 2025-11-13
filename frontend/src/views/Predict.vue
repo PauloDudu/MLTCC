@@ -1,7 +1,7 @@
 <template>
   <div class="bento-grid bento-predict">
     <!-- Form Section -->
-    <div class="bento-item form">
+    <div class="bento-item form" v-if="!prediction">
         <div class="mb-4">
           <h2 class="text-h5 font-weight-bold mb-2">
             <v-icon left color="#BB86FC">mdi-account-heart</v-icon>
@@ -10,7 +10,7 @@
         </div>
             <v-form @submit.prevent="predictRisk">
               <v-row>
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-text-field
                     v-model.number="patientData.age"
                     label="Idade"
@@ -20,20 +20,22 @@
                     :rules="[rules.required, rules.ageRange]"
                     hint="30-80 anos"
                     persistent-hint
+                    density="comfortable"
                   ></v-text-field>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-select
                     v-model.number="patientData.gender"
                     :items="genderOptions"
                     label="Gênero"
                     variant="outlined"
                     prepend-inner-icon="mdi-human-male-female"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-text-field
                     v-model.number="patientData.height"
                     label="Altura"
@@ -43,10 +45,11 @@
                     suffix="cm"
                     hint="150-200 cm"
                     persistent-hint
+                    density="comfortable"
                   ></v-text-field>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-text-field
                     v-model.number="patientData.weight"
                     label="Peso"
@@ -56,10 +59,11 @@
                     suffix="kg"
                     hint="40-150 kg"
                     persistent-hint
+                    density="comfortable"
                   ></v-text-field>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-text-field
                     v-model.number="patientData.ap_hi"
                     label="Pressão Sistólica"
@@ -69,10 +73,11 @@
                     suffix="mmHg"
                     hint="90-200 mmHg"
                     persistent-hint
+                    density="comfortable"
                   ></v-text-field>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-text-field
                     v-model.number="patientData.ap_lo"
                     label="Pressão Diastólica"
@@ -82,56 +87,62 @@
                     suffix="mmHg"
                     hint="60-120 mmHg"
                     persistent-hint
+                    density="comfortable"
                   ></v-text-field>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-select
                     v-model.number="patientData.cholesterol"
                     :items="cholesterolOptions"
                     label="Nível de Colesterol"
                     variant="outlined"
                     prepend-inner-icon="mdi-water"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
                 
-                <v-col cols="12" sm="6">
+                <v-col cols="6" md="6">
                   <v-select
                     v-model.number="patientData.gluc"
                     :items="glucoseOptions"
                     label="Nível de Glicose"
                     variant="outlined"
                     prepend-inner-icon="mdi-diabetes"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
                 
-                <v-col cols="12" sm="4">
+                <v-col cols="6" md="4">
                   <v-select
                     v-model.number="patientData.smoke"
                     :items="binaryOptions"
                     label="Fumante"
                     variant="outlined"
                     prepend-inner-icon="mdi-smoking"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
                 
-                <v-col cols="12" sm="4">
+                <v-col cols="6" md="4">
                   <v-select
                     v-model.number="patientData.alco"
                     :items="binaryOptions"
                     label="Consome Álcool"
                     variant="outlined"
                     prepend-inner-icon="mdi-glass-wine"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
                 
-                <v-col cols="12" sm="4">
+                <v-col cols="12" md="4">
                   <v-select
                     v-model.number="patientData.active"
                     :items="binaryOptions"
                     label="Atividade Física"
                     variant="outlined"
                     prepend-inner-icon="mdi-run"
+                    density="comfortable"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -152,21 +163,30 @@
 
     <!-- Result Section -->
     <div class="bento-item result" v-if="prediction">
-      <div class="mb-4">
+      <div class="mb-4 d-flex justify-space-between align-center">
         <h2 class="text-h5 font-weight-bold mb-2">
           <v-icon left color="#BB86FC">mdi-chart-donut</v-icon>
           Resultado da IA
         </h2>
+        <v-btn 
+          icon 
+          size="small" 
+          color="#BB86FC" 
+          variant="outlined"
+          @click="prediction = null"
+        >
+          <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
       </div>
             <v-card 
               :color="getRiskColor(prediction.risk_level)"
               class="mb-3 pa-3"
               dark
             >
-              <div class="text-center">
+              <div class="d-flex align-center justify-center">
                 <v-icon size="default" class="mr-2">{{ getRiskIcon(prediction.risk_level) }}</v-icon>
-                <span class="text-h6 font-weight-bold">{{ getRiskLabel(prediction.risk_level) }}</span>
-                <div class="text-body-1">{{ (prediction.probability * 100).toFixed(1) }}%</div>
+                <span class="text-h6 font-weight-bold mr-3">{{ getRiskLabel(prediction.risk_level) }}</span>
+                <span class="text-h6">{{ (prediction.probability * 100).toFixed(1) }}%</span>
               </div>
             </v-card>
             
@@ -188,27 +208,71 @@
               </v-card-text>
             </v-card>
             
-            <v-card class="mt-4" flat>
-              <v-card-text class="pa-3">
-                <div class="text-subtitle-2 mb-2">Recomendação:</div>
-                <div class="text-body-2">{{ getRecommendations(prediction.risk_level) }}</div>
-              </v-card-text>
-            </v-card>
-            
             <PredictionExplanation 
               :patient-data="patientData" 
               :prediction="prediction" 
             />
+            
+            <v-card class="mt-4" flat>
+              <v-card-text class="pa-3">
+                <div class="text-subtitle-2 mb-2">📝 Recomendações & Explicação:</div>
+                <div class="text-body-2 mb-3">{{ getRecommendations(prediction.risk_level) }}</div>
+                <div v-if="prediction.ai_explanation" class="text-body-2" style="background: rgba(187, 134, 252, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #BB86FC;">
+                  <strong>🤖 Explicação Personalizada:</strong><br>
+                  {{ prediction.ai_explanation }}
+                </div>
+              </v-card-text>
+            </v-card>
     </div>
 
-    <!-- Chat Section -->
-    <div class="bento-item chat" v-if="prediction">
-      <AIChat 
-        ref="aiChat"
-        :patient-data="patientData" 
-        :prediction="prediction" 
-      />
-    </div>
+    <!-- Floating Chat Button -->
+    <v-tooltip 
+      v-model="showTooltip" 
+      text="Alguma dúvida?" 
+      location="left"
+    >
+      <template v-slot:activator="{ props }">
+        <v-btn 
+          v-if="prediction" 
+          v-bind="props"
+          class="floating-chat-btn"
+          color="#BB86FC"
+          size="large"
+          icon
+          elevation="8"
+          @click="showChat = !showChat"
+        >
+          <v-icon size="28">mdi-chat-question</v-icon>
+        </v-btn>
+      </template>
+    </v-tooltip>
+
+    <!-- Floating Chat Panel -->
+    <v-dialog 
+      v-model="showChat" 
+      fullscreen 
+      hide-overlay 
+      transition="dialog-bottom-transition"
+      class="chat-dialog"
+    >
+      <v-card class="chat-card">
+        <v-card-title class="d-flex align-center pa-4">
+          <v-icon class="mr-2" color="#BB86FC">mdi-robot</v-icon>
+          <span>IA Explicativa</span>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="showChat = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text class="pa-0 chat-container">
+          <AIChat 
+            ref="aiChat"
+            :patient-data="patientData" 
+            :prediction="prediction" 
+          />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -230,6 +294,8 @@ export default {
     return {
       loading: false,
       prediction: null,
+      showChat: false,
+      showTooltip: false,
       patientData: {
         age: 50,
         gender: 1,
@@ -300,6 +366,8 @@ export default {
             popup: 'bento-swal',
             confirmButton: 'bento-swal-btn'
           }
+        }).then(() => {
+          this.showTooltipOnce()
         })
       } catch (error) {
         Swal.fire({
@@ -380,8 +448,19 @@ export default {
       } else {
         return 'Avaliação cardiologica urgente, medicação e monitoramento contínuo.'
       }
+    },
+    
+    showTooltipOnce() {
+      if (window.innerWidth <= 767 && this.prediction) {
+        this.showTooltip = true
+        setTimeout(() => {
+          this.showTooltip = false
+        }, 5000) // Hide after 5s
+      }
     }
-  }
+  },
+  
+
 }
 </script>
 
@@ -411,5 +490,51 @@ export default {
   font-weight: 500 !important;
   text-transform: none !important;
   padding: 12px 24px !important;
+}
+
+/* Floating Chat Button with Liquid Glass Effect */
+.floating-chat-btn {
+  position: fixed !important;
+  bottom: 80px !important;
+  right: 20px !important;
+  z-index: 1000 !important;
+  background: rgba(187, 134, 252, 0.2) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(187, 134, 252, 0.3) !important;
+  animation: float 3s ease-in-out infinite !important;
+}
+
+.floating-chat-btn:hover {
+  background: rgba(187, 134, 252, 0.3) !important;
+  transform: scale(1.1) !important;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Chat Dialog Styles */
+.chat-dialog .v-overlay__content {
+  margin: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.chat-card {
+  height: 100% !important;
+  background: #121212 !important;
+  border-radius: 0 !important;
+}
+
+.chat-container {
+  height: calc(100vh - 64px) !important;
+  overflow: hidden !important;
+}
+
+@media (min-width: 768px) {
+  .floating-chat-btn {
+    bottom: 20px !important;
+  }
 }
 </style>

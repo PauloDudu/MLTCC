@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explanation-card">
-    <v-card-title class="bg-info white--text">
+    <v-card-title class="text-white" style="background: #BB86FC;">
       <v-icon left>mdi-lightbulb</v-icon>
       Explicação da Decisão
     </v-card-title>
@@ -44,25 +44,7 @@
         </div>
       </div>
 
-      <v-divider class="my-4"></v-divider>
 
-      <div class="summary-section">
-        <div class="text-subtitle-2 mb-2">Resumo da Análise:</div>
-        <v-chip 
-          v-for="factor in topFactors" 
-          :key="factor"
-          :color="getFactorColor(factor)"
-          size="small"
-          class="ma-1"
-        >
-          {{ factor }}
-        </v-chip>
-      </div>
-      
-      <v-card v-if="prediction.ai_explanation" color="info" variant="tonal" class="pa-3 mt-3">
-        <div class="text-subtitle-2 mb-2">🤖 Explicação Personalizada:</div>
-        <div class="text-body-2">{{ prediction.ai_explanation }}</div>
-      </v-card>
     </v-card-text>
   </v-card>
 </template>

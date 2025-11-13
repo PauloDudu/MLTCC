@@ -13,28 +13,28 @@
         <v-icon left size="32">mdi-database</v-icon>
         Dataset Cardiovascular
       </h3>
-      <div class="d-flex justify-space-around text-center mb-4">
-        <div>
-          <div class="text-h3 font-weight-bold mb-2">68.742</div>
-          <div class="text-h6 opacity-90">Total de Casos</div>
+      <v-row class="mb-4">
+        <v-col cols="6" md="3" class="text-center">
+          <div class="text-h4 font-weight-bold mb-2">68.742</div>
+          <div class="text-subtitle-1 opacity-90">Total de Casos</div>
           <div class="text-body-2 opacity-70 mt-1">Pacientes únicos</div>
-        </div>
-        <div>
-          <div class="text-h3 font-weight-bold mb-2">54.994</div>
-          <div class="text-h6 opacity-90">Treino (80%)</div>
+        </v-col>
+        <v-col cols="6" md="3" class="text-center">
+          <div class="text-h4 font-weight-bold mb-2">54.994</div>
+          <div class="text-subtitle-1 opacity-90">Treino (80%)</div>
           <div class="text-body-2 opacity-70 mt-1">Para aprendizado</div>
-        </div>
-        <div>
-          <div class="text-h3 font-weight-bold mb-2">13.748</div>
-          <div class="text-h6 opacity-90">Teste (20%)</div>
+        </v-col>
+        <v-col cols="6" md="3" class="text-center">
+          <div class="text-h4 font-weight-bold mb-2">13.748</div>
+          <div class="text-subtitle-1 opacity-90">Teste (20%)</div>
           <div class="text-body-2 opacity-70 mt-1">Para validação</div>
-        </div>
-        <div>
-          <div class="text-h3 font-weight-bold mb-2">11</div>
-          <div class="text-h6 opacity-90">Variáveis</div>
+        </v-col>
+        <v-col cols="6" md="3" class="text-center">
+          <div class="text-h4 font-weight-bold mb-2">11</div>
+          <div class="text-subtitle-1 opacity-90">Variáveis</div>
           <div class="text-body-2 opacity-70 mt-1">Características</div>
-        </div>
-      </div>
+        </v-col>
+      </v-row>
       <v-divider class="my-4"></v-divider>
       <div class="text-center">
         <v-chip color="success" size="large" class="mr-2">

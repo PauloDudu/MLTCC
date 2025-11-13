@@ -1,40 +1,46 @@
-/* Bento Grid System */
+/* Mobile-First Bento Grid System */
 .bento-grid {
   display: grid;
-  gap: 16px;
-  padding: 16px;
+  gap: 12px;
+  padding: 12px;
   width: 100%;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 120px);
   box-sizing: border-box;
+  padding-bottom: 80px;
 }
 
-/* Home Layout */
+/* Mobile-First Home Layout */
 .bento-home {
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "hero hero hero hero hero hero hero hero hero hero hero hero"
-    "feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat3 feat3 feat3 feat3"
-    "stats stats stats stats stats stats stats stats stats stats stats stats"
-    "info info info info info info chat chat chat chat chat chat";
-  height: calc(100vh - 56px);
-  overflow: hidden;
+    "hero"
+    "feat1"
+    "feat2"
+    "feat3"
+    "stats"
+    "info"
+    "chat";
+  gap: 16px;
 }
 
-/* Predict Layout */
+/* Mobile-First Predict Layout */
 .bento-predict {
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "form form form form form form form result result result result result"
-    "chat chat chat chat chat chat chat result result result result result";
+    "form"
+    "result"
+    "chat";
+  gap: 16px;
 }
 
-/* Cases Layout */
+/* Mobile-First Cases Layout */
 .bento-cases {
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "case case case case case case case case answer answer answer answer"
-    "history history history history history history stats stats stats stats stats stats";
+    "hero"
+    "case"
+    "answer";
+  gap: 16px;
 }
 
 /* Bento Items */
@@ -84,42 +90,68 @@
   color: white;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
+/* Tablet Responsive (768px+) */
+@media (min-width: 768px) {
+  .bento-grid {
+    gap: 16px;
+    padding: 16px;
+    padding-bottom: 20px;
+    min-height: calc(100vh - 56px);
+  }
+  
   .bento-home {
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "hero hero hero hero hero hero hero hero hero hero hero hero"
-      "feat1 feat1 feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat2 feat2"
-      "feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3 feat3"
-      "stats stats stats stats stats stats stats stats stats stats stats stats"
-      "info info info info info info info info info info info info"
-      "chat chat chat chat chat chat chat chat chat chat chat chat";
+      "hero hero"
+      "feat1 feat2"
+      "feat3 stats"
+      "info chat";
   }
   
   .bento-predict {
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "form form form form form form form form form form form form"
-      "result result result result result result result result result result result result"
-      "chat chat chat chat chat chat chat chat chat chat chat chat";
+      "form result"
+      "chat result";
   }
   
   .bento-cases {
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "case case case case case case case case case case case case"
-      "answer answer answer answer answer answer answer answer answer answer answer answer"
-      "history history history history history history history history history history history history"
-      "stats stats stats stats stats stats stats stats stats stats stats stats";
+      "hero hero"
+      "case answer";
   }
 }
 
-@media (max-width: 768px) {
+/* Desktop Responsive (1200px+) */
+@media (min-width: 1200px) {
   .bento-grid {
-    gap: 12px;
-    padding: 12px;
+    gap: 20px;
+    padding: 20px;
   }
   
-  .bento-item {
-    padding: 16px;
-    border-radius: 8px;
+  .bento-home {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "hero hero hero hero hero hero hero hero hero hero hero hero"
+      "feat1 feat1 feat1 feat1 feat2 feat2 feat2 feat2 feat3 feat3 feat3 feat3"
+      "stats stats stats stats stats stats stats stats stats stats stats stats"
+      "info info info info info info chat chat chat chat chat chat";
+    height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+  
+  .bento-predict {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "form form form form form form form result result result result result"
+      "chat chat chat chat chat chat chat result result result result result";
+  }
+  
+  .bento-cases {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      "hero hero hero hero hero hero hero hero hero hero hero hero"
+      "case case case case case case case case answer answer answer answer";
   }
 }

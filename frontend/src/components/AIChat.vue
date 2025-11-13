@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="chat-card mt-4">
-    <v-card-title class="bg-secondary text-white">
+    <v-card-title class="text-white" style="background: #BB86FC;">
       <v-icon left>mdi-chat</v-icon>
       Chat com IA - Tire suas dúvidas
     </v-card-title>
@@ -122,9 +122,24 @@ export default {
           content: response.response
         })
       } catch (error) {
+        console.error('Chat error:', error)
+        let errorMessage = '❌ **Erro de conexão** com a IA. '
+        
+        if (error.response) {
+          if (error.response.status === 500) {
+            errorMessage += 'Problema no servidor. Tente novamente em alguns segundos.'
+          } else if (error.response.status === 401) {
+            errorMessage += 'Problema de autenticação da API.'
+          } else {
+            errorMessage += `Código: ${error.response.status}`
+          }
+        } else {
+          errorMessage += 'Verifique sua conexão com a internet.'
+        }
+        
         this.messages.push({
           role: 'assistant',
-          content: 'Desculpe, ocorreu um erro. Tente novamente.'
+          content: errorMessage
         })
       } finally {
         this.loading = false
@@ -177,9 +192,15 @@ export default {
 
 <style scoped>
 .chat-messages {
-  height: 300px;
+  height: calc(100vh - 200px);
   overflow-y: auto;
   background: #000000;
+}
+
+@media (max-width: 767px) {
+  .chat-messages {
+    height: calc(100vh - 220px);
+  }
 }
 
 .message-card {
