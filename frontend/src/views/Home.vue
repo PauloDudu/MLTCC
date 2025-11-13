@@ -2,7 +2,7 @@
   <div class="bento-grid bento-home">
     <!-- Hero Section -->
     <div class="bento-item hero bento-hero">
-      <v-icon size="48" class="mb-4 pulse-icon">mdi-heart-pulse</v-icon>
+      <v-icon size="48" color="primary" class="mb-4 pulse-icon">mdi-heart-pulse</v-icon>
       <h1 class="text-h3 font-weight-bold mb-2">CardioLearn AI</h1>
       <p class="text-h6 opacity-80">Sistema Inteligente para Ensino de Doenças Cardiovasculares</p>
     </div>
@@ -57,7 +57,7 @@
     <div class="bento-item chat">
       <h4 class="text-h6 font-weight-bold mb-3">IA Explicativa</h4>
       <div class="chat-preview">
-        <div class="chat-message mb-2 pa-2" style="background: #1e1e1e; border-radius: 8px;">
+        <div class="chat-message mb-2 pa-2" style="background: rgb(var(--v-theme-surface)); border-radius: 8px; border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));">
           <small class="opacity-60">IA:</small>
           <p class="text-body-2 ma-0">"Baseado na idade e pressão arterial, o risco é moderado..."</p>
         </div>
@@ -67,15 +67,8 @@
 </template>
 
 <script>
-import FeatureCard from '../components/FeatureCard.vue'
-import PageHeader from '../components/PageHeader.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    FeatureCard,
-    PageHeader
-  }
+  name: 'Home'
 }
 </script>
 
@@ -95,6 +88,6 @@ export default {
 }
 
 .chat-message {
-  border-left: 3px solid #BB86FC;
+  border-left: 3px solid rgb(var(--v-theme-primary));
 }
 </style>

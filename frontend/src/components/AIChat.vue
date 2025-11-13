@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="chat-card mt-4">
-    <v-card-title class="text-white" style="background: #BB86FC;">
+    <v-card-title class="text-white" style="background: rgb(var(--v-theme-primary));">
       <v-icon left>mdi-chat</v-icon>
       Chat com IA - Tire suas dúvidas
     </v-card-title>
@@ -194,7 +194,7 @@ export default {
 .chat-messages {
   height: calc(100vh - 200px);
   overflow-y: auto;
-  background: #000000;
+  background: rgb(var(--v-theme-background));
 }
 
 @media (max-width: 767px) {
@@ -209,11 +209,11 @@ export default {
 }
 
 .chat-input {
-  background: #121212;
+  background: rgb(var(--v-theme-surface));
 }
 
 .text-body-2 >>> strong {
-  color: #BB86FC;
+  color: rgb(var(--v-theme-primary));
   font-weight: 600;
 }
 

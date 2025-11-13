@@ -45,8 +45,8 @@
 
 /* Bento Items */
 .bento-item {
-  background: #121212;
-  border: 1px solid #1e1e1e;
+  background: rgb(var(--v-theme-surface));
+  border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
   border-radius: 12px;
   padding: 20px;
   transition: all 0.3s ease;
@@ -55,9 +55,9 @@
 }
 
 .bento-item:hover {
-  border-color: #BB86FC;
+  border-color: rgb(var(--v-theme-primary));
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(187, 134, 252, 0.1);
+  box-shadow: 0 8px 32px rgba(98, 0, 234, 0.1);
 }
 
 .bento-item.hero { grid-area: hero; }
@@ -75,18 +75,18 @@
 
 /* Special Styles */
 .bento-hero {
-  background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+  background: rgb(var(--v-theme-surface));
   text-align: center;
   padding: 40px 20px;
 }
 
 .bento-feature {
   cursor: pointer;
-  background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+  background: rgb(var(--v-theme-surface));
 }
 
 .bento-stats {
-  background: linear-gradient(135deg, #BB86FC 0%, #9C27B0 100%);
+  background: linear-gradient(135deg, rgb(var(--v-theme-primary)) 0%, rgb(var(--v-theme-secondary)) 100%);
   color: white;
 }
 

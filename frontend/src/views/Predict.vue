@@ -279,14 +279,12 @@
 <script>
 import { cardiovascularAPI } from '../services/api'
 import Swal from 'sweetalert2'
-import PageHeader from '../components/PageHeader.vue'
 import PredictionExplanation from '../components/PredictionExplanation.vue'
 import AIChat from '../components/AIChat.vue'
 
 export default {
   name: 'Predict',
   components: {
-    PageHeader,
     PredictionExplanation,
     AIChat
   },
@@ -337,7 +335,9 @@ export default {
     async predictRisk() {
       this.loading = true
       // Reset chat context for new analysis
-      this.$refs.aiChat?.resetContext()
+      if (this.$refs.aiChat) {
+        this.$refs.aiChat.resetContext()
+      }
       
       try {
         this.prediction = await cardiovascularAPI.predictRisk(this.patientData)
@@ -482,7 +482,9 @@ export default {
 
 :global(.bento-swal) {
   border-radius: 12px !important;
-  border: 1px solid #1e1e1e !important;
+  border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+  background: rgb(var(--v-theme-surface)) !important;
+  color: rgb(var(--v-theme-on-surface)) !important;
 }
 
 :global(.bento-swal-btn) {
@@ -523,7 +525,7 @@ export default {
 
 .chat-card {
   height: 100% !important;
-  background: #121212 !important;
+  background: rgb(var(--v-theme-surface)) !important;
   border-radius: 0 !important;
 }
 

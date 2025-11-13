@@ -57,19 +57,19 @@
       <div class="d-flex flex-column ga-2">
         <div class="d-flex justify-space-between">
           <span>Acurácia Geral</span>
-          <v-chip color="success" size="small">71.2%</v-chip>
+          <v-chip color="success" size="small">73.9%</v-chip>
         </div>
         <div class="d-flex justify-space-between">
           <span>Precisão</span>
-          <v-chip color="primary" size="small">69.8%</v-chip>
+          <v-chip color="primary" size="small">74.0%</v-chip>
         </div>
         <div class="d-flex justify-space-between">
           <span>Recall</span>
-          <v-chip color="info" size="small">74.1%</v-chip>
+          <v-chip color="info" size="small">74.0%</v-chip>
         </div>
         <div class="d-flex justify-space-between">
           <span>F1-Score</span>
-          <v-chip color="warning" size="small">71.9%</v-chip>
+          <v-chip color="warning" size="small">74.0%</v-chip>
         </div>
       </div>
     </div>
@@ -80,19 +80,19 @@
         <v-icon left color="#BB86FC">mdi-brain</v-icon>
         Algoritmo
       </h3>
-      <v-chip color="#BB86FC" size="large" class="mb-3">Random Forest</v-chip>
+      <v-chip color="primary" size="large" class="mb-3">LightGBM</v-chip>
       <div class="d-flex flex-column ga-1">
         <div class="d-flex justify-space-between">
-          <span class="text-body-2">Árvores:</span>
+          <span class="text-body-2">Estimadores:</span>
           <span class="text-body-2">100</span>
         </div>
         <div class="d-flex justify-space-between">
-          <span class="text-body-2">Critério:</span>
-          <span class="text-body-2">Gini</span>
+          <span class="text-body-2">Max Depth:</span>
+          <span class="text-body-2">10</span>
         </div>
         <div class="d-flex justify-space-between">
-          <span class="text-body-2">Seed:</span>
-          <span class="text-body-2">42</span>
+          <span class="text-body-2">Learning Rate:</span>
+          <span class="text-body-2">0.1</span>
         </div>
       </div>
     </div>
@@ -147,7 +147,7 @@
         </div>
         <div class="d-flex align-start ga-2">
           <v-icon color="error" size="small">mdi-minus-circle</v-icon>
-          <span class="text-body-2">71% de acurácia indica margem de erro</span>
+          <span class="text-body-2">74% de acurácia indica margem de erro</span>
         </div>
       </div>
     </div>
@@ -155,13 +155,8 @@
 </template>
 
 <script>
-import PageHeader from '../components/PageHeader.vue'
-
 export default {
   name: 'ModelMetrics',
-  components: {
-    PageHeader
-  },
   data() {
     return {
       variables: [
@@ -264,13 +259,13 @@ export default {
         },
         {
           title: 'Treinamento do Modelo',
-          description: 'Random Forest com 100 árvores treinado nos dados de treino',
+          description: 'LightGBM com 100 estimadores treinado nos dados de treino',
           icon: 'mdi-brain',
           color: 'success'
         },
         {
           title: 'Avaliação e Validação',
-          description: 'Teste no conjunto separado resultando em 71.2% de acurácia',
+          description: 'Teste no conjunto separado resultando em 73.9% de acurácia',
           icon: 'mdi-check-circle',
           color: 'success'
         }

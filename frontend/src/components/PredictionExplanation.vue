@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="explanation-card">
-    <v-card-title class="text-white" style="background: #BB86FC;">
+    <v-card-title class="text-white" style="background: rgb(var(--v-theme-primary));">
       <v-icon left>mdi-lightbulb</v-icon>
       Explicação da Decisão
     </v-card-title>
@@ -271,11 +271,11 @@ export default {
 }
 
 .positive-impact {
-  background: linear-gradient(90deg, #FF5252, #F44336);
+  background: linear-gradient(90deg, rgb(var(--v-theme-error)), #F44336);
 }
 
 .negative-impact {
-  background: linear-gradient(90deg, #4CAF50, #388E3C);
+  background: linear-gradient(90deg, rgb(var(--v-theme-success)), #388E3C);
 }
 
 .impact-text {

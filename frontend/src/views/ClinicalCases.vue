@@ -194,14 +194,13 @@
 </template>
 
 <script>
-import { cardiovascularAPI } from '../services/api'
-import PageHeader from '../components/PageHeader.vue'
+import api from '../services/api'
 import AIChat from '../components/AIChat.vue'
+import { handleApiError } from '@/utils/alerts'
 
 export default {
   name: 'ClinicalCases',
   components: {
-    PageHeader,
     AIChat
   },
   data() {
@@ -246,7 +245,7 @@ export default {
         
         this.resetAnswer()
       } catch (error) {
-        alert('Erro ao gerar caso: ' + error.message)
+        handleApiError(error, 'GENERATE_CASE')
       } finally {
         this.loading = false
       }
@@ -275,6 +274,9 @@ export default {
       }
       
       this.answered = true
+      
+      // Salvar no histórico
+      await this.saveToHistory(correctRisk, this.userPrediction, this.result.correct)
     },
     
     resetCase() {
@@ -363,6 +365,32 @@ export default {
       } else {
         return `Com ${percentage}% de risco, o paciente apresenta múltiplos fatores de alto risco cardiovascular.`
       }
+    },
+    
+    async saveToHistory(gabarito, resposta, acertou) {
+      try {
+        const token = localStorage.getItem('token')
+        if (!token) {
+          console.log('Token não encontrado')
+          return
+        }
+        
+        console.log('Salvando no histórico:', { gabarito, resposta, acertou })
+        
+        const response = await api.post('/save-caso', {
+          caso_dados: this.currentCase,
+          gabarito: gabarito,
+          resposta: resposta,
+          acertou: acertou
+        }, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        
+        console.log('Salvo com sucesso:', response.data)
+      } catch (error) {
+        console.error('Erro ao salvar no histórico:', error)
+        handleApiError(error, 'SAVE_CASE')
+      }
     }
   }
 }
@@ -400,7 +428,7 @@ export default {
 
 .chat-card {
   height: 100% !important;
-  background: #121212 !important;
+  background: rgb(var(--v-theme-surface)) !important;
   border-radius: 0 !important;
 }
 

@@ -1,9 +1,9 @@
 <template>
-  <v-card class="mb-4 page-header gradient-bg" elevation="0">
-    <v-card-text class="text-center pa-4 white--text">
-      <v-icon size="24" color="white" class="mr-2">{{ icon }}</v-icon>
+  <v-card class="mb-4 page-header" elevation="0">
+    <v-card-text class="text-center pa-4">
+      <v-icon size="24" color="primary" class="mr-2">{{ icon }}</v-icon>
       <span :class="titleClass" class="font-weight-medium">{{ title }}</span>
-      <p v-if="subtitle" class="text-body-2 opacity-90 mb-0 mt-1">{{ subtitle }}</p>
+      <p v-if="subtitle" class="text-body-2 mb-0 mt-1" style="opacity: 0.7;">{{ subtitle }}</p>
     </v-card-text>
   </v-card>
 </template>
@@ -31,6 +31,6 @@ export default {
 <style scoped>
 .page-header {
   border-radius: 4px !important;
-  background: #1e1e1e !important;
+  background: rgb(var(--v-theme-surface)) !important;
 }
 </style>

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+import lightgbm as lgb
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, accuracy_score
 import joblib
@@ -77,8 +77,15 @@ def train_model():
     # Split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
-    # Treinar modelo
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    # Treinar modelo LightGBM
+    model = lgb.LGBMClassifier(
+        n_estimators=100,
+        max_depth=10,
+        learning_rate=0.1,
+        num_leaves=31,
+        random_state=42,
+        verbose=-1
+    )
     model.fit(X_train, y_train)
     
     # Avaliar
@@ -91,7 +98,7 @@ def train_model():
     
     # Salvar modelo
     joblib.dump(model, 'cardiovascular_model.pkl')
-    print("\nModelo salvo como 'cardiovascular_model.pkl'")
+    print("\nModelo LightGBM salvo como 'cardiovascular_model.pkl'")
     
     return model
 

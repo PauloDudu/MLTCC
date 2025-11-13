@@ -7,17 +7,7 @@ from ..interfaces.repositories import MLModelRepository
 
 class ScikitLearnMLRepository(MLModelRepository):
     def __init__(self, model_path: str = "ml_models/cardiovascular_model.pkl"):
-        try:
-            self.model = joblib.load(model_path)
-        except FileNotFoundError:
-            # Criar modelo simples se não existir
-            from sklearn.ensemble import RandomForestClassifier
-            self.model = RandomForestClassifier(n_estimators=10, random_state=42)
-            # Treinar com dados dummy usando as novas features
-            import numpy as np
-            X_dummy = np.random.rand(100, 11)  # 11 features do dataset cardiovascular
-            y_dummy = np.random.randint(0, 2, 100)
-            self.model.fit(X_dummy, y_dummy)
+        self.model = joblib.load(model_path)
         self.feature_names = [
             'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo',
             'cholesterol', 'gluc', 'smoke', 'alco', 'active'
