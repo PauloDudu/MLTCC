@@ -163,21 +163,21 @@
         </v-btn>
       </template>
     </v-tooltip>
-
-    <!-- Floating Chat Panel -->
-    <v-dialog 
-      v-model="showChat" 
-      fullscreen 
-      transition="dialog-bottom-transition"
-    >
-      <AIChat 
-        v-if="showChat"
-        :patient-data="currentCase" 
-        :prediction="{ risk_level: 'caso_clinico', probability: 0.5 }" 
-        @close="showChat = false"
-      />
-    </v-dialog>
   </div>
+
+  <!-- Floating Chat Panel -->
+  <v-dialog 
+    v-model="showChat" 
+    fullscreen 
+    transition="dialog-bottom-transition"
+  >
+    <AIChat 
+      v-if="showChat"
+      :patient-data="currentCase" 
+      :prediction="{ risk_level: 'caso_clinico', probability: 0.5 }" 
+      @close="showChat = false"
+    />
+  </v-dialog>
 </template>
 
 <script>
