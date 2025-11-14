@@ -194,7 +194,7 @@ export default {
 .chat-fullscreen {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   background: rgb(var(--v-theme-background));
   position: fixed;
@@ -206,11 +206,12 @@ export default {
 .chat-header {
   background: rgb(var(--v-theme-primary));
   color: white;
-  padding: 12px 16px;
+  padding: 8px 12px;
   font-weight: 600;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  height: 56px;
+  height: 44px;
   flex-shrink: 0;
 }
 
