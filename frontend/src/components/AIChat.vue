@@ -191,15 +191,28 @@ export default {
 </script>
 
 <style scoped>
+.chat-card {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 100px);
+}
+
 .chat-messages {
-  height: calc(100vh - 200px);
+  height: 400px;
+  max-height: calc(100vh - 300px);
   overflow-y: auto;
   background: rgb(var(--v-theme-background));
 }
 
 @media (max-width: 767px) {
+  .chat-card {
+    max-height: calc(100vh - 80px);
+  }
+  
   .chat-messages {
-    height: calc(100vh - 220px);
+    height: 300px;
+    max-height: calc(100vh - 250px);
+    min-height: 200px;
   }
 }
 
