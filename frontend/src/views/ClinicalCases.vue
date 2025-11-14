@@ -147,7 +147,7 @@
 
 
     <!-- Floating Chat Button -->
-    <v-tooltip text="Alguma dúvida?" location="left">
+    <v-tooltip v-model="showTooltip" text="Alguma dúvida?" location="left">
       <template v-slot:activator="{ props }">
         <v-btn 
           v-if="answered" 
@@ -197,7 +197,8 @@ export default {
       userPrediction: '',
       answered: false,
       result: null,
-      showChat: false
+      showChat: false,
+      showTooltip: false
     }
   },
   methods: {
@@ -261,6 +262,14 @@ export default {
       }
       
       this.answered = true
+      
+      // Mostrar tooltip após 1 segundo
+      setTimeout(() => {
+        this.showTooltip = true
+        setTimeout(() => {
+          this.showTooltip = false
+        }, 3000)
+      }, 1000)
       
       // Salvar no histórico
       await this.saveToHistory(correctRisk, this.userPrediction, this.result.correct)

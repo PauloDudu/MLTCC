@@ -246,22 +246,22 @@
         </v-btn>
       </template>
     </v-tooltip>
-
-    <!-- Floating Chat Panel -->
-    <v-dialog 
-      v-model="showChat" 
-      fullscreen 
-      transition="dialog-bottom-transition"
-    >
-      <AIChat 
-        v-if="showChat"
-        ref="aiChat"
-        :patient-data="patientData" 
-        :prediction="prediction" 
-        @close="showChat = false"
-      />
-    </v-dialog>
   </div>
+
+  <!-- Floating Chat Panel -->
+  <v-dialog 
+    v-model="showChat" 
+    fullscreen 
+    transition="dialog-bottom-transition"
+  >
+    <AIChat 
+      v-if="showChat"
+      ref="aiChat"
+      :patient-data="patientData" 
+      :prediction="prediction" 
+      @close="showChat = false"
+    />
+  </v-dialog>
 </template>
 
 <script>
