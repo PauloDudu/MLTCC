@@ -1,11 +1,11 @@
 <template>
-  <v-card flat class="chat-card mt-4">
-    <v-card-title class="text-white" style="background: rgb(var(--v-theme-primary));">
-      <v-icon left>mdi-chat</v-icon>
+  <div class="chat-wrapper">
+    <div class="chat-header">
+      <v-icon class="mr-2">mdi-chat</v-icon>
       Chat com IA - Tire suas dúvidas
-    </v-card-title>
-    <v-card-text class="pa-0">
-      <div class="chat-messages pa-3" ref="messagesContainer">
+    </div>
+    
+    <div class="chat-messages" ref="messagesContainer">
         <div v-for="(msg, index) in messages" :key="index" class="message mb-3">
           <v-card 
             :color="msg.role === 'user' ? 'primary' : 'surface'"
@@ -24,34 +24,31 @@
         <div v-if="loading" class="text-center">
           <v-progress-circular indeterminate color="primary" size="24"></v-progress-circular>
         </div>
-      </div>
-      
-      <v-divider></v-divider>
-      
-      <div class="chat-input pa-3">
-        <v-text-field
-          v-model="userMessage"
-          placeholder="Pergunte sobre o diagnóstico, fatores de risco, recomendações..."
-          variant="outlined"
-          density="compact"
-          hide-details
-          @keyup.enter="sendMessage"
-        >
-          <template v-slot:append-inner>
-            <v-btn 
-              icon 
-              size="small" 
-              color="primary" 
-              @click="sendMessage"
-              :disabled="!userMessage.trim() || loading"
-            >
-              <v-icon>mdi-send</v-icon>
-            </v-btn>
-          </template>
-        </v-text-field>
-      </div>
-    </v-card-text>
-  </v-card>
+    </div>
+    
+    <div class="chat-input">
+      <v-text-field
+        v-model="userMessage"
+        placeholder="Digite sua mensagem..."
+        variant="outlined"
+        density="compact"
+        hide-details
+        @keyup.enter="sendMessage"
+      >
+        <template v-slot:append-inner>
+          <v-btn 
+            icon 
+            size="small" 
+            color="primary" 
+            @click="sendMessage"
+            :disabled="!userMessage.trim() || loading"
+          >
+            <v-icon>mdi-send</v-icon>
+          </v-btn>
+        </template>
+      </v-text-field>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -191,32 +188,43 @@ export default {
 </script>
 
 <style scoped>
-.chat-card {
+.chat-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.chat-header {
+  background: rgb(var(--v-theme-primary));
+  color: white;
+  padding: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .chat-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   background: rgb(var(--v-theme-background));
+  padding: 16px;
   min-height: 0;
 }
 
-@media (max-width: 767px) {
-  .chat-messages {
-    min-height: 0;
-  }
+.chat-input {
+  padding: 12px 16px;
+  background: rgb(var(--v-theme-surface));
+  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  flex-shrink: 0;
 }
 
 .message-card {
   max-width: 80%;
   border-radius: 8px !important;
-}
-
-.chat-input {
-  background: rgb(var(--v-theme-surface));
 }
 
 .text-body-2 >>> strong {
