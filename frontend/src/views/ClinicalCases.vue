@@ -147,10 +147,10 @@
 
 
     <!-- Floating Chat Button -->
-    <v-tooltip text="Dúvidas sobre o caso?" location="left">
+    <v-tooltip text="Alguma dúvida?" location="left">
       <template v-slot:activator="{ props }">
         <v-btn 
-          v-if="currentCase" 
+          v-if="answered" 
           v-bind="props"
           class="floating-chat-btn"
           color="#BB86FC"
