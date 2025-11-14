@@ -104,7 +104,6 @@
               label="Qual o risco cardiovascular?"
               variant="outlined"
               density="compact"
-              readonly
             ></v-select>
             
             <v-btn 

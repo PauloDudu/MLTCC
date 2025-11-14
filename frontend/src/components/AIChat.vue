@@ -219,14 +219,13 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 16px;
-  height: calc(100vh - 56px - 72px);
+  min-height: 0;
 }
 
 .chat-input {
   padding: 12px 16px;
   background: rgb(var(--v-theme-surface));
   border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-  height: 72px;
   flex-shrink: 0;
 }
 
