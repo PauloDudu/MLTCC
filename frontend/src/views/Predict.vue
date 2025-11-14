@@ -251,27 +251,15 @@
     <v-dialog 
       v-model="showChat" 
       fullscreen 
-      hide-overlay 
       transition="dialog-bottom-transition"
-      class="chat-dialog"
     >
-      <v-card class="chat-card">
-        <v-card-title class="d-flex align-center pa-4">
-          <v-icon class="mr-2" color="#BB86FC">mdi-robot</v-icon>
-          <span>IA Explicativa</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showChat = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-card-text class="pa-0 chat-container">
-          <AIChat 
-            ref="aiChat"
-            :patient-data="patientData" 
-            :prediction="prediction" 
-          />
-        </v-card-text>
-      </v-card>
+      <AIChat 
+        v-if="showChat"
+        ref="aiChat"
+        :patient-data="patientData" 
+        :prediction="prediction" 
+        @close="showChat = false"
+      />
     </v-dialog>
   </div>
 </template>
@@ -514,24 +502,6 @@ export default {
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
-}
-
-/* Chat Dialog Styles */
-.chat-dialog .v-overlay__content {
-  margin: 0 !important;
-  height: 100% !important;
-  width: 100% !important;
-}
-
-.chat-card {
-  height: 100% !important;
-  background: rgb(var(--v-theme-surface)) !important;
-  border-radius: 0 !important;
-}
-
-.chat-container {
-  height: calc(100vh - 64px) !important;
-  overflow: hidden !important;
 }
 
 @media (min-width: 768px) {

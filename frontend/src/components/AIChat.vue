@@ -1,8 +1,11 @@
 <template>
-  <div class="chat-wrapper">
+  <div class="chat-fullscreen">
     <div class="chat-header">
-      <v-icon class="mr-2">mdi-chat</v-icon>
-      Chat com IA - Tire suas dúvidas
+      <v-btn icon @click="$emit('close')" class="mr-2">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-icon class="mr-2">mdi-robot</v-icon>
+      <span>IA - Caso Clínico</span>
     </div>
     
     <div class="chat-messages" ref="messagesContainer">
@@ -188,21 +191,26 @@ export default {
 </script>
 
 <style scoped>
-.chat-wrapper {
+.chat-fullscreen {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(var(--v-theme-background));
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 
 .chat-header {
   background: rgb(var(--v-theme-primary));
   color: white;
-  padding: 16px;
+  padding: 12px 16px;
   font-weight: 600;
   display: flex;
   align-items: center;
+  height: 56px;
   flex-shrink: 0;
 }
 
@@ -210,15 +218,15 @@ export default {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background: rgb(var(--v-theme-background));
   padding: 16px;
-  min-height: 0;
+  height: calc(100vh - 56px - 72px);
 }
 
 .chat-input {
   padding: 12px 16px;
   background: rgb(var(--v-theme-surface));
   border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+  height: 72px;
   flex-shrink: 0;
 }
 
