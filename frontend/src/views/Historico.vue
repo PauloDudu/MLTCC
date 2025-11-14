@@ -255,6 +255,7 @@
               user_answer: casoSelecionado.resposta,
               correct: casoSelecionado.acertou
             }" 
+            @close="showChat = false"
           />
         </v-card-text>
       </v-card>
