@@ -150,7 +150,7 @@
     <v-tooltip v-model="showTooltip" text="Alguma dúvida?" location="left">
       <template v-slot:activator="{ props }">
         <v-btn 
-          v-if="answered" 
+          v-if="currentCase" 
           v-bind="props"
           class="floating-chat-btn"
           color="#BB86FC"

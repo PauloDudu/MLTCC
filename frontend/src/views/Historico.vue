@@ -146,8 +146,8 @@
           <v-icon class="mr-2" color="primary">mdi-clipboard-text</v-icon>
           Detalhes do Caso
           <v-spacer></v-spacer>
-          <v-btn icon @click="showDetalhes = false">
-            <v-icon>mdi-close</v-icon>
+          <v-btn icon size="small" @click="showDetalhes = false">
+            <v-icon size="20">mdi-close</v-icon>
           </v-btn>
         </v-card-title>
         
@@ -239,12 +239,11 @@
     >
       <v-card>
         <v-card-title class="d-flex align-center pa-4">
-          <v-icon class="mr-2" color="primary">mdi-robot</v-icon>
-          <span>IA - Caso do Histórico</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showChat = false">
-            <v-icon>mdi-close</v-icon>
+          <v-btn icon size="small" @click="showChat = false" class="mr-2">
+            <v-icon size="20">mdi-arrow-left</v-icon>
           </v-btn>
+          <v-icon size="20" class="mr-2" color="primary">mdi-robot</v-icon>
+          <span>IA - Caso do Histórico</span>
         </v-card-title>
         <v-card-text class="pa-0" style="height: calc(100vh - 64px);">
           <AIChat 

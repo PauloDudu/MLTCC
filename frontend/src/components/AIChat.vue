@@ -1,10 +1,10 @@
 <template>
   <div class="chat-fullscreen">
     <div class="chat-header">
-      <v-btn icon @click="$emit('close')" class="mr-2">
-        <v-icon>mdi-arrow-left</v-icon>
+      <v-btn icon size="small" @click="$emit('close')" class="mr-2">
+        <v-icon size="20">mdi-arrow-left</v-icon>
       </v-btn>
-      <v-icon class="mr-2">mdi-robot</v-icon>
+      <v-icon size="20" class="mr-2">mdi-robot</v-icon>
       <span>IA - Caso Clínico</span>
     </div>
     
