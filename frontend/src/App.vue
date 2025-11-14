@@ -152,7 +152,8 @@ export default {
     return {
       activeTab: 'home',
       drawer: false,
-      isDark: true
+      isDark: true,
+      loggedIn: !!localStorage.getItem('token')
     }
   },
   mounted() {
@@ -162,7 +163,7 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      return !!localStorage.getItem('token')
+      return this.loggedIn
     },
     showNavigation() {
       return this.$route.path !== '/login'
@@ -178,6 +179,7 @@ export default {
     logout() {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
+      this.loggedIn = false
       this.drawer = false
       this.$router.push('/')
     },
@@ -199,6 +201,7 @@ export default {
           
           localStorage.removeItem('token')
           localStorage.removeItem('user')
+          this.loggedIn = false
           this.drawer = false
           this.$router.push('/')
           showSuccess('Sucesso!', 'Conta apagada com sucesso!')
@@ -210,6 +213,7 @@ export default {
   },
   watch: {
     $route(to) {
+      this.loggedIn = !!localStorage.getItem('token')
       if (to.path === '/home') this.activeTab = 'home'
       else if (to.path === '/predict') this.activeTab = 'predict'
       else if (to.path === '/cases') this.activeTab = 'cases'

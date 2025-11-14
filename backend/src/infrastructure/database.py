@@ -1,23 +1,22 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/cardio_ml_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./cardio_ml.db")
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 class ClinicalCaseModel(Base):
     __tablename__ = "clinical_cases"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     description = Column(Text, nullable=False)
     age = Column(Integer, nullable=False)
     gender = Column(Integer, nullable=False)
@@ -36,7 +35,7 @@ class ClinicalCaseModel(Base):
 class PredictionLogModel(Base):
     __tablename__ = "prediction_logs"
     
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     age = Column(Integer, nullable=False)
     gender = Column(Integer, nullable=False)
     height = Column(Float, nullable=False)

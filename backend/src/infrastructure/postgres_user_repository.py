@@ -50,8 +50,8 @@ class CasoHistoricoModel(Base):
 
 class PostgresUserRepository:
     def __init__(self):
-        database_url = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/cardio_ml_db")
-        self.engine = create_engine(database_url)
+        database_url = os.getenv("DATABASE_URL", "sqlite:///./cardio_ml.db")
+        self.engine = create_engine(database_url, connect_args={"check_same_thread": False})
         Base.metadata.create_all(self.engine)
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
