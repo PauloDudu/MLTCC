@@ -105,13 +105,17 @@ class CardiovascularController:
             try:
                 from datetime import datetime, timedelta
                 user = self.user_repository.get_user_by_login(request["login"])
-                if not user or not self.auth_service.verify_password(request["senha"], user.senha_hash):
-                    raise HTTPException(status_code=401, detail="Credenciais inválidas")
+                if not user:
+                    raise HTTPException(status_code=401, detail="Usuário não encontrado")
+                if not self.auth_service.verify_password(request["senha"], user.senha_hash):
+                    raise HTTPException(status_code=401, detail="Login e senha incorretos")
                 
                 token = self.auth_service.create_token(user.id, user.login)
                 expires_at = datetime.utcnow() + timedelta(hours=4)
                 self.user_repository.save_token(user.id, token, expires_at)
                 return {"token": token, "user": {"id": user.id, "login": user.login, "nome": user.nome}}
+            except HTTPException:
+                raise
             except Exception as e:
                 raise HTTPException(status_code=500, detail=str(e))
         

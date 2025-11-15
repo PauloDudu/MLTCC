@@ -10,25 +10,28 @@
         <v-form @submit.prevent="isLogin ? login() : register()">
           <v-text-field
             v-model="form.login"
-            label="Login"
+            placeholder="Login"
             prepend-icon="mdi-account"
             required
+            variant="outlined"
           />
           
           <v-text-field
             v-if="!isLogin"
             v-model="form.nome"
-            label="Nome"
+            placeholder="Nome"
             prepend-icon="mdi-account-circle"
             required
+            variant="outlined"
           />
           
           <v-text-field
             v-model="form.senha"
-            label="Senha"
+            placeholder="Senha"
             type="password"
             prepend-icon="mdi-lock"
             required
+            variant="outlined"
           />
           
           <v-btn
@@ -71,6 +74,14 @@ export default {
       }
     }
   },
+  mounted() {
+    const savedLogin = localStorage.getItem('savedLogin')
+    const savedSenha = localStorage.getItem('savedSenha')
+    if (savedLogin && savedSenha) {
+      this.form.login = savedLogin
+      this.form.senha = savedSenha
+    }
+  },
   methods: {
     async login() {
       this.loading = true
@@ -94,7 +105,9 @@ export default {
       this.loading = true
       try {
         await api.post('/register', this.form)
-        await showSuccess('Sucesso!', 'Usuário criado com sucesso!')
+        localStorage.setItem('savedLogin', this.form.login)
+        localStorage.setItem('savedSenha', this.form.senha)
+        await showSuccess('Cadastro realizado!', 'Usuário criado com sucesso!')
         this.isLogin = true
       } catch (error) {
         handleApiError(error, 'CADASTRO')

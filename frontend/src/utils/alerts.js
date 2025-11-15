@@ -73,16 +73,16 @@ export const handleApiError = (error, context = '') => {
     switch (status) {
       case 400:
         if (detail.includes('Login já existe')) {
-          userMessage = 'Este login já está em uso. Escolha outro.'
+          userMessage = 'Login já cadastrado. Escolha outro.'
         } else {
           userMessage = 'Dados inválidos. Verifique as informações.'
         }
         break
       case 401:
-        if (detail.includes('Credenciais inválidas')) {
-          userMessage = 'Usuário ou senha incorretos.'
+        if (detail.includes('Usuário não encontrado')) {
+          userMessage = 'Usuário não cadastrado.'
         } else {
-          userMessage = 'Acesso negado. Faça login novamente.'
+          userMessage = 'Login e senha incorretos.'
         }
         break
       case 404:
